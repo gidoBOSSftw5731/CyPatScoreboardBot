@@ -242,7 +242,6 @@ namespace CyberPatriot.Services.ScoreRetrieval
             summary.Warnings |= warnStr.Contains("M") ? ScoreWarnings.MultiImage : 0;
             summary.Warnings |= warnStr.Contains("W") ? ScoreWarnings.Withdrawn : 0;
             summary.TotalScore = dataEntries.Last().Trim() != "" ? double.Parse(dataEntries.Last().Trim()) : 0;
-            summary.TotalScore = double.Parse(dataEntries.Last().Trim());
         }
 
         protected virtual IEnumerable<ScoreboardSummaryEntry> ProcessSummaries(HtmlDocument doc, out DateTimeOffset processTimestamp)
