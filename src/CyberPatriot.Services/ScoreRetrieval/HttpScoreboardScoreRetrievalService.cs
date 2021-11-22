@@ -344,7 +344,7 @@ namespace CyberPatriot.Services.ScoreRetrieval
                 return image;
             }
 
-            if (ciscoIndex != -1)
+            if (ciscoIndex != -1 && summaryRowData[ciscoIndex] != "")
             {
                 // pseudoimage
                 // FIXME shouldn't display vulns and penalties and time
@@ -362,7 +362,7 @@ namespace CyberPatriot.Services.ScoreRetrieval
                 retVal.Images.Add(CreatePseudoImage("Cisco (Total)", double.Parse(summaryRowData[ciscoIndex]), ciscoDenom));
             }
 
-            if (penaltyIndex != -1)
+            if (penaltyIndex != -1 && summaryRowData[penaltyIndex] != "")
             {
                 retVal.Images.Add(CreatePseudoImage("Administrative Adjustment", double.Parse(summaryRowData[penaltyIndex]), 0));
             }
