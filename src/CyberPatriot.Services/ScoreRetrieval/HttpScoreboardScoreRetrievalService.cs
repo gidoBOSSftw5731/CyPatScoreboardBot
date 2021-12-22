@@ -358,13 +358,18 @@ namespace CyberPatriot.Services.ScoreRetrieval
                 {
                     // probably because round 0; unknown total
                 }
-
-                retVal.Images.Add(CreatePseudoImage("Cisco (Total)", double.Parse(summaryRowData[ciscoIndex]), ciscoDenom));
+                if (summaryRowData[ciscoIndex] == "")
+                    retVal.Images.Add(CreatePseudoImage("Cisco (Total)", 0.0, ciscoDenom));
+                else
+                    retVal.Images.Add(CreatePseudoImage("Cisco (Total)", double.Parse(summaryRowData[ciscoIndex]), ciscoDenom));
             }
 
             if (penaltyIndex != -1 && summaryRowData[penaltyIndex] != "")
             {
-                retVal.Images.Add(CreatePseudoImage("Administrative Adjustment", double.Parse(summaryRowData[penaltyIndex]), 0));
+                if(summaryRowData[penaltyIndex] == "")
+                    retVal.Images.Add(CreatePseudoImage("Administrative Adjustment", 0.0, 0));
+                else
+                    retVal.Images.Add(CreatePseudoImage("Administrative Adjustment", double.Parse(summaryRowData[penaltyIndex]), 0));
             }
 
             // score graph
