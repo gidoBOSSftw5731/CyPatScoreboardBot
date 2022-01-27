@@ -318,10 +318,10 @@ namespace CyberPatriot.Services.ScoreRetrieval
             }
 
             // reparse summary table (CCS+Cisco case)
-            // pseudoimages: Cisco, administrative adjustment (usually penalty)
+            // pseudoimages: Cisco, administrative adjustment (usually penalty, now includes boeing), Webbased challenge
             int ciscoIndex = summaryHeaderRowData.IndexOfWhere(x => x.ToLower().Contains("cisco"));
             int penaltyIndex = summaryHeaderRowData.IndexOfWhere(x => x.ToLower().Contains("adjust"));
-
+            int challengeIndex = summaryHeaderRowData.IndexOfWhere(x => x.ToLower().Contains("challenge"));
             ScoreboardImageDetails CreatePseudoImage(string name, double score, double possible)
             {
                 var image = new ScoreboardImageDetails();
@@ -360,10 +360,36 @@ namespace CyberPatriot.Services.ScoreRetrieval
 
             if (penaltyIndex != -1)
             {
-                if(summaryRowData[penaltyIndex] == "")
-                    retVal.Images.Add(CreatePseudoImage("Administrative Adjustment", 0.0, 0));
+                double penaltyDenom = -1;
+                try
+                {
+                    penaltyDenom = _roundInferenceService.GetAdjustPointsPossible(Round, retVal.Summary.Division, retVal.Summary.Tier);
+                }
+                catch
+                {
+                    // probably because round 0; unknown total
+                }
+                if (summaryRowData[penaltyIndex] == "")
+                    retVal.Images.Add(CreatePseudoImage("Administrative Adjustment / Boeing Challenge", 0.0, penaltyDenom));
                 else
-                    retVal.Images.Add(CreatePseudoImage("Administrative Adjustment", double.Parse(summaryRowData[penaltyIndex]), 0));
+                    retVal.Images.Add(CreatePseudoImage("Administrative Adjustment / Boeing Challenge", double.Parse(summaryRowData[penaltyIndex]), penaltyDenom));
+            }
+
+            if (challengeIndex != -1)
+            {
+                double challengeDenom = -1;
+                try
+                {
+                    challengeDenom = _roundInferenceService.GetChallengePointsPossible(Round, retVal.Summary.Division, retVal.Summary.Tier);
+                }
+                catch
+                {
+                    // probably because round 0; unknown total
+                }
+                if (summaryRowData[challengeIndex] == "")
+                    retVal.Images.Add(CreatePseudoImage("Web-based Challenge", 0.0, challengeDenom));
+                else
+                    retVal.Images.Add(CreatePseudoImage("Web-based Challenge", double.Parse(summaryRowData[challengeIndex]), challengeDenom));
             }
 
             // score graph
