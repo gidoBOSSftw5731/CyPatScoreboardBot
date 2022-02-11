@@ -42,8 +42,12 @@ namespace CyberPatriot.Services
             preconfiguredRound = round;
             underlyingService = underlying;
         }
-        
+
         double ICompetitionRoundLogicService.GetCiscoPointsPossible(CompetitionRound round, Division division, Tier? tier) => underlyingService.GetCiscoPointsPossible(round, division, tier);
+
+        double ICompetitionRoundLogicService.GetAdjustPointsPossible(CompetitionRound round, Division division, Tier? tier) => underlyingService.GetAdjustPointsPossible(round, division, tier);
+
+        double ICompetitionRoundLogicService.GetChallengePointsPossible(CompetitionRound round, Division division, Tier? tier) => underlyingService.GetChallengePointsPossible(round, division, tier);
 
         string ICompetitionRoundLogicService.GetEffectiveDivisionDescriptor(ScoreboardSummaryEntry team) => underlyingService.GetEffectiveDivisionDescriptor(team);
 
