@@ -408,6 +408,16 @@ namespace CyberPatriot.DiscordBot.Services
 
                     warningsOverview += "Time Limit Exceeded";
                 }
+                if ((teamScore.Summary.Warnings & ScoreWarnings.Withdrawn) == ScoreWarnings.Withdrawn)
+                {
+                    if (warningsOverview == null)
+                    {
+                        warningsOverview = "";
+                    }
+                    else
+                    {
+                        warningsOverview += "\n";
+                    }
 
             if ((teamScore.Summary.Warnings & ScoreWarnings.Withdrawn) == ScoreWarnings.Withdrawn)
                 {
