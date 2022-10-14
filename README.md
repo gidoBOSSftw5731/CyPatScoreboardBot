@@ -10,7 +10,7 @@ Features include:
 - All Service teams are shown rankings with categories taken into account
 - Get notifications in chat when your team changes in placement
 
-[Add me](https://discordapp.com/oauth2/authorize?client_id=389204961717649408&permissions=510016&scope=bot) to your Discord server.
+[Add me](https://cleckley.click/csfork) to your Discord server.
 
 *Note: This bot is affiliated with neither [Discord](https://discordapp.com) nor the [Air Force Association](https://www.afa.org/home) (the organization which runs the [CyberPatriot competition](http://www.uscyberpatriot.org)). All scores reported by the bot (even those marked "official") are and should be treated as unofficial. No predictions or assertions regarding advancement made by the bot are in any way binding - actual results can and do differ. Refer to the license for more information.*
 
