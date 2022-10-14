@@ -51,9 +51,11 @@ namespace CyberPatriot.DiscordBot.Modules
 
         public ILocationResolutionService LocationResolutionService { get; set; }
 
+        // this is where the team command is parsed, the competition number is defined earlier
         [Command("team"), Alias("getteam"), Summary("Gets score information for a given team.")]
         public async Task GetTeamAsync(TeamId teamId)
         {
+
             using (Context.Channel.EnterTypingState())
             {
                 ScoreboardDetails teamScore = await ScoreRetrievalService.GetDetailsAsync(teamId).ConfigureAwait(false);

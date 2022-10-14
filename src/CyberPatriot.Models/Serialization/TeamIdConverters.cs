@@ -52,8 +52,9 @@ namespace CyberPatriot.Models.Serialization
     {
         /// <summary>
         /// The default competition identifier to assume, when user input of just a team number is given.
+        // This is how you change the default competition ID. This was very hard to find
         /// </summary>
-        public const string DefaultCompetition = "13";
+        public const string DefaultCompetition = "15";
 
         private static readonly int DefaultCompetitionNumericIdLength;
 
