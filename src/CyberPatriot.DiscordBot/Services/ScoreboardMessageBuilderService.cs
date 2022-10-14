@@ -418,6 +418,7 @@ namespace CyberPatriot.DiscordBot.Services
                     {
                         warningsOverview += "\n";
                     }
+                }
 
             if ((teamScore.Summary.Warnings & ScoreWarnings.Withdrawn) == ScoreWarnings.Withdrawn)
                 {
