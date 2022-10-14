@@ -250,6 +250,11 @@ namespace CyberPatriot.DiscordBot.Modules
         {
             using (Context.Channel.EnterTypingState())
             {
+                // Cypat messed up in CPXV-R1, so this is a workaround
+                if (location == "VI")
+                {
+                    location = "VA";
+                }
                 CompleteScoreboardSummary teamScore = await ScoreRetrievalService.GetScoreboardAsync(new ScoreboardFilterInfo(divFilter, tierFilter, category, location)).ConfigureAwait(false);
                 if (teamScore == null)
                 {
