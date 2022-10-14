@@ -408,6 +408,30 @@ namespace CyberPatriot.DiscordBot.Services
 
                     warningsOverview += "Time Limit Exceeded";
                 }
+                if ((teamScore.Summary.Warnings & ScoreWarnings.Withdrawn) == ScoreWarnings.Withdrawn)
+                {
+                    if (warningsOverview == null)
+                    {
+                        warningsOverview = "";
+                    }
+                    else
+                    {
+                        warningsOverview += "\n";
+                    }
+
+            if ((teamScore.Summary.Warnings & ScoreWarnings.Withdrawn) == ScoreWarnings.Withdrawn)
+                {
+                    if (warningsOverview == null)
+                    {
+                        warningsOverview = "";
+                    }
+                    else
+                    {
+                        warningsOverview += "\n";
+                    }
+
+                    warningsOverview += "Score Withdrawn";
+                }
 
                 builder.AddInlineField("Warnings", warningsOverview);
             }
@@ -476,8 +500,19 @@ namespace CyberPatriot.DiscordBot.Services
                 StringBuilder marginBuilder = new StringBuilder();
                 if (myIndexInPeerList > 0)
                 {
-                    double marginUnderFirst = peerList[0].TotalScore - teamScore.Summary.TotalScore;
-                    marginBuilder.AppendLine($"{ScoreRetrieverMetadata.FormattingOptions.FormatLabeledScoreDifference(marginUnderFirst)} under 1st place");
+                    double marginUnderFirst = -1;
+                    int firstTeamNumber = 1;
+                    // = peerList[0].TotalScore - teamScore.Summary.TotalScore
+                    foreach (var i in peerList) {
+                        if (i.Warnings == ScoreWarnings.Withdrawn) {
+                            firstTeamNumber++;
+                            continue;
+                        }
+                        marginUnderFirst = i.TotalScore - teamScore.Summary.TotalScore;
+                        break;
+                    }
+                    
+                    marginBuilder.AppendLine($"{ScoreRetrieverMetadata.FormattingOptions.FormatLabeledScoreDifference(marginUnderFirst)} under {Utilities.AppendOrdinalSuffix(firstTeamNumber)} place");
                 }
                 if (myIndexInPeerList >= 2)
                 {
